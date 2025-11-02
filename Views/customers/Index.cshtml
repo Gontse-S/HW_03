@@ -1,0 +1,80 @@
+﻿@model IEnumerable<HW_03.Models.customers>
+
+@{
+    ViewBag.Title = "Customers List";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4 fw-bold" style="color:#c0678b; text-shadow:1px 1px 2px rgba(255,228,240,0.5);">
+        👥 Customers List
+    </h2>
+
+    <div class="table-responsive shadow-sm rounded-3 bg-white p-3">
+        <table class="table table-striped table-hover align-middle text-center mb-0">
+            <thead style="background-color:#c8a2c8; color:white;">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.first_name)</th>
+                    <th>@Html.DisplayNameFor(model => model.last_name)</th>
+                    <th>@Html.DisplayNameFor(model => model.phone)</th>
+                    <th>@Html.DisplayNameFor(model => model.email)</th>
+                    <th>@Html.DisplayNameFor(model => model.street)</th>
+                    <th>@Html.DisplayNameFor(model => model.city)</th>
+                    <th>@Html.DisplayNameFor(model => model.state)</th>
+                    <th>@Html.DisplayNameFor(model => model.zip_code)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="table-row-hover">
+                        <td>@Html.DisplayFor(modelItem => item.first_name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.last_name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.phone)</td>
+                        <td>@Html.DisplayFor(modelItem => item.email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.street)</td>
+                        <td>@Html.DisplayFor(modelItem => item.city)</td>
+                        <td>@Html.DisplayFor(modelItem => item.state)</td>
+                        <td>@Html.DisplayFor(modelItem => item.zip_code)</td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.customer_id }, new { @class = "btn btn-outline-pink btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    /* Table Hover */
+    .table-row-hover:hover {
+        background-color: #f6b6c8cc !important;
+        transform: translateY(-1px);
+        transition: all 0.2s ease;
+    }
+
+    /* Buttons */
+    .btn-outline-pink {
+        border: 2px solid #c0678b;
+        color: #c0678b;
+        background-color: transparent;
+        border-radius: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-outline-pink:hover {
+            background-color: #c0678b;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(192, 103, 139, 0.3);
+        }
+
+    /* Table Container */
+    .table-responsive {
+        background-color: #fff9fb;
+        border-radius: 1rem;
+        box-shadow: 0 4px 12px rgba(242, 174, 199, 0.15);
+    }
+</style>

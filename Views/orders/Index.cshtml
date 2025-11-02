@@ -1,0 +1,69 @@
+﻿@model IEnumerable<HW_03.Models.orders>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.order_status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.order_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.required_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.shipped_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customers.first_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.staffs.first_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.stores.store_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.order_status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.order_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.required_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.shipped_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.customers.first_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.staffs.first_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.stores.store_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.order_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.order_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.order_id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,223 @@
+﻿@model IEnumerable<HW_03.Models.PopularProductsViewModel>
+@{
+    ViewBag.Title = "Popular Products Report";
+    var archivePath = Server.MapPath("~/ReportArchive/");
+    if (!Directory.Exists(archivePath)) { Directory.CreateDirectory(archivePath); }
+    var files = Directory.GetFiles(archivePath);
+}
+
+<div class="container mt-5 mb-5">
+    <!-- ✨ PAGE TITLE -->
+    <div class="text-center mb-4">
+        <h1 class="fw-bold text-center mb-2" style="color:#c0678b; text-shadow:1px 1px 2px rgba(255,228,240,0.5);">
+            Popular Products Report
+        </h1>
+        <p class="text-muted">Visualize and archive your most popular products beautifully 🌸</p>
+    </div>
+
+    <!-- 🎯 SELECT TOP PRODUCTS -->
+    <div class="card shadow-sm border-0 mb-5" style="border-radius:1rem; background-color:#fff9fb;">
+        <div class="card-body text-center">
+            <form method="get" action="@Url.Action("Contact", "Home")" class="d-inline-flex align-items-center flex-wrap justify-content-center gap-3">
+                <label for="topCount" class="fw-bold" style="color:#9d6379;">Select Top Products:</label>
+                <select id="topCount" name="topCount" class="form-select w-auto shadow-sm" style="border-radius:0.75rem;">
+                    @for (int i = 5; i <= 10; i++)
+                    {
+                        <option value="@i" @(ViewBag.TopCount == i ? "selected" : "")>@i</option>
+                    }
+                </select>
+                <button type="submit" class="btn btn-primary px-4 py-2">
+                    <i class="bi bi-bar-chart-line"></i> Show Chart
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 📊 CHART SECTION -->
+    <div class="card shadow-sm border-0 mb-5" style="border-radius:1rem; background-color:#ffffffcc;">
+        <div class="card-body text-center">
+            <h4 class="fw-bold mb-3" style="color:#a24a6a;">Top @ViewBag.TopCount Popular Products</h4>
+            <img src="@Url.Action("ChartImage", "Home", new { topCount = ViewBag.TopCount })"
+                 alt="Popular Products Chart" class="img-fluid rounded shadow-sm border border-light" style="max-height:450px; background:white;" />
+        </div>
+    </div>
+
+
+    <!-- 💾 SAVE REPORT + ARCHIVE -->
+    <div class="row g-4">
+        <!-- SAVE REPORT CARD -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0" style="border-radius:1rem; background-color:#fff9fb;">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3" style="color:#a24a6a;">💾 Save Report</h5>
+                    @using (Html.BeginForm("SaveReport", "Home", FormMethod.Post))
+                    {
+                        <input type="hidden" name="topCount" value="@ViewBag.TopCount" />
+
+                        <div class="mb-3">
+                            <label class="form-label">Enter Filename:</label>
+                            <input type="text" name="reportName" class="form-control shadow-sm" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Select File Type:</label>
+                            <select name="fileType" class="form-control shadow-sm" required>
+                                <option value="png">PNG (Chart only)</option>
+                                <option value="pdf">PNG Report (Chart + Table)</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Report Description:</label>
+                            <textarea name="reportDescription" class="form-control rich-text shadow-sm" rows="4"
+                                      placeholder="Add a description or notes for this report..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-2 shadow-sm">
+                            <i class="bi bi-save2"></i> Save Report
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- DOCUMENT ARCHIVE CARD -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0" style="border-radius:1rem; background-color:#ffffffcc;">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3" style="color:#a24a6a;">📂 Document Archive</h5>
+                    <div class="table-responsive" style="max-height:350px; overflow-y:auto;">
+                        <table class="table table-hover text-center align-middle">
+                            <thead style="background-color:#c8a2c8; color:white;">
+                                <tr>
+                                    <th>Filename</th>
+                                    <th>Size</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var file in files)
+                                {
+                                    var info = new FileInfo(file);
+                                    string descPath = Path.ChangeExtension(file, ".txt");
+                                    string description = System.IO.File.Exists(descPath)
+                                        ? System.IO.File.ReadAllText(descPath)
+                                        : "No description provided";
+
+                                    <tr>
+                                        <td>@info.Name</td>
+                                        <td>@(info.Length / 1024) KB</td>
+                                        <td>@description</td>
+                                        <td>
+                                            <a href="@Url.Action("Download", "Home", new { fileName = info.Name })"
+                                               class="btn btn-outline-pink btn-sm me-1">
+                                                <i class="bi bi-download"></i>
+                                            </a>
+                                            <a href="@Url.Action("Delete", "Home", new { fileName = info.Name })"
+                                               class="btn btn-outline-pink btn-sm">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 📋 DATA TABLE -->
+        <div class="card shadow-sm border-0 mb-5" style="border-radius:1rem; background-color:#fff9fb;">
+            <div class="card-body">
+                <h5 class="fw-bold mb-3" style="color:#a24a6a;">📦 Product Details</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped text-center align-middle shadow-sm">
+                        <thead style="background-color:#c8a2c8; color:white;">
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Brand</th>
+                                <th>Category</th>
+                                <th>Times Ordered</th>
+                                <th>Total Quantity Sold</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.Brand</td>
+                                    <td>@item.Category</td>
+                                    <td>@item.TimesOrdered</td>
+                                    <td>@item.TotalQuantity</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ✨ Custom Styling -->
+<style>
+    body {
+        background: linear-gradient(135deg, #fff5f8, #f8f5ff);
+        font-family: 'Poppins', sans-serif;
+        color: #4b3b47;
+    }
+
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(162, 74, 106, 0.15);
+        }
+
+    .btn-primary {
+        background-color: #c8a2c8;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #b084b0;
+        }
+
+    .btn-outline-pink {
+        border: 2px solid #c0678b;
+        color: #c0678b;
+        background-color: transparent;
+        border-radius: 0.5rem;
+        padding: 0.25rem 0.6rem;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-outline-pink:hover {
+            background-color: #c0678b;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(192, 103, 139, 0.3);
+        }
+
+    .rich-text {
+        resize: both;
+        min-height: 80px;
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 14px;
+        padding: 8px;
+        border: 1px solid #eecad4;
+        border-radius: 6px;
+        background-color: #fff9fb;
+    }
+
+    .form-control:focus {
+        box-shadow: 0 0 0 0.2rem rgba(238, 159, 177, 0.3);
+        border-color: #e695ad;
+    }
+</style>

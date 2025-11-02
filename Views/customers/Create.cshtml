@@ -1,0 +1,148 @@
+﻿@model HW_03.Models.customers
+
+@{
+    ViewBag.Title = "Create Customer";
+}
+
+<div class="container mt-5 mb-5">
+    <!-- ✨ PAGE TITLE -->
+    <div class="text-center mb-4">
+        <h1 class="fw-bold" style="color:#c0678b; text-shadow:1px 1px 2px rgba(255,228,240,0.5);">
+            Create New Customer
+        </h1>
+        <p class="text-muted">Add a new customer to your database 🌸</p>
+    </div>
+
+    <!-- 📝 FORM CARD -->
+    <div class="card shadow-sm border-0" style="border-radius:1rem; background-color:#fff9fb;">
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger mb-3" })
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.first_name, new { @class = "form-label fw-bold", style = "color:#9d6379;" })
+                        @Html.EditorFor(model => model.first_name, new { htmlAttributes = new { @class = "form-control shadow-sm" } })
+                        @Html.ValidationMessageFor(model => model.first_name, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.last_name, new { @class = "form-label fw-bold", style = "color:#9d6379;" })
+                        @Html.EditorFor(model => model.last_name, new { htmlAttributes = new { @class = "form-control shadow-sm" } })
+                        @Html.ValidationMessageFor(model => model.last_name, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.phone, new { @class = "form-label fw-bold", style = "color:#9d6379;" })
+                        @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control shadow-sm" } })
+                        @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.email, new { @class = "form-label fw-bold", style = "color:#9d6379;" })
+                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control shadow-sm" } })
+                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.street, new { @class = "form-label fw-bold", style = "color:#9d6379;" })
+                        @Html.EditorFor(model => model.street, new { htmlAttributes = new { @class = "form-control shadow-sm" } })
+                        @Html.ValidationMessageFor(model => model.street, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.city, new { @class = "form-label fw-bold", style = "color:#9d6379;" })
+                        @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control shadow-sm" } })
+                        @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.state, new { @class = "form-label fw-bold", style = "color:#9d6379;" })
+                        @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control shadow-sm" } })
+                        @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.zip_code, new { @class = "form-label fw-bold", style = "color:#9d6379;" })
+                        @Html.EditorFor(model => model.zip_code, new { htmlAttributes = new { @class = "form-control shadow-sm" } })
+                        @Html.ValidationMessageFor(model => model.zip_code, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <!-- SUBMIT BUTTON -->
+                <div class="text-center mt-4">
+                    <input type="submit" value="Create Customer" class="btn btn-primary px-5 py-2 shadow-sm" />
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- BACK LINK -->
+    <div class="text-center mt-3">
+        @Html.ActionLink("← Back to List", "Index", "Home", null, new { @class = "btn btn-outline-pink shadow-sm" })
+    </div>
+</div>
+
+<!-- ✨ STYLING -->
+<style>
+    body {
+        background: linear-gradient(135deg, #fff5f8, #f8f5ff);
+        font-family: 'Poppins', sans-serif;
+        color: #4b3b47;
+    }
+
+    .form-control {
+        border: 1px solid #eecad4;
+        border-radius: 0.75rem;
+        background-color: #fff9fb;
+    }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 0.2rem rgba(238, 159, 177, 0.3);
+            border-color: #e695ad;
+        }
+
+    .btn-primary {
+        background-color: #c8a2c8;
+        border: none;
+        color: #fff;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #b084b0;
+        }
+
+    .btn-outline-pink {
+        border: 2px solid #c0678b;
+        color: #c0678b;
+        background-color: transparent;
+        border-radius: 0.5rem;
+        padding: 0.35rem 0.75rem;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-outline-pink:hover {
+            background-color: #c0678b;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(192, 103, 139, 0.3);
+        }
+
+    .card {
+        border-radius: 1rem;
+        background-color: #fff9fb;
+        box-shadow: 0 4px 12px rgba(242, 174, 199, 0.15);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(162, 74, 106, 0.15);
+        }
+</style>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,248 @@
+﻿@using System.Linq
+@model HW_03.Models.HomePageViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+<div class="text-center my-4 brand-heading">
+    <h2 class="cycle-text">Cycle</h2>
+    <h2 class="haven-text">Haven</h2>
+</div>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="~/Content/Theme.css" />
+<div class="container-fluid mt-4">
+
+    <h2 class="text-center mb-4 fw-bold">🏠 Home</h2>
+
+    <div class="row justify-content-between">
+
+        <!-- ================= STAFF SECTION ================= -->
+        <div class="col-md-4 bg-light border rounded-3 p-3 shadow-sm">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="fw-bold">Staff</h5>
+                <a href="@Url.Action("Create", "staffs")" class="btn btn-success mb-3">
+                    + Create Staff
+                </a>
+            </div>
+
+            @if (Model.StaffList != null && Model.StaffList.Any())
+            {
+                var s = Model.StaffList.First();
+                <div class="mb-2">
+                    <label class="fw-semibold">First Name</label>
+                    <input type="text" class="form-control mb-2" value="@s.first_name" readonly />
+                    <label class="fw-semibold">Last Name</label>
+                    <input type="text" class="form-control mb-2" value="@s.last_name" readonly />
+                    <label class="fw-semibold">Staff ID</label>
+                    <input type="text" class="form-control mb-2" value="@s.staff_id" readonly />
+
+                    <div class="border p-2 bg-white rounded mt-2" style="min-height:80px;">
+                        @if (s.orders != null && s.orders.Any())
+                        {
+                            foreach (var order in s.orders)
+                            {
+                                foreach (var item in order.order_items)
+                                {
+                                    <div>• Sold @item.products.product_name</div>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <span>No sales</span>
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p>No staff found.</p>
+            }
+
+            <!-- Staff Pagination -->
+            <div class="d-flex justify-content-center mt-3">
+                <nav>
+                    <ul class="pagination pagination-sm mb-0">
+                        <li class="page-item @(ViewBag.StaffPage <= 1 ? "disabled" : "")">
+                            <a class="page-link" href="?staffPage=@(ViewBag.StaffPage - 1)&customerPage=@ViewBag.CustomerPage">‹</a>
+                        </li>
+                        <li class="page-item"><span class="page-link">@ViewBag.StaffPage</span></li>
+                        <li class="page-item">
+                            <a class="page-link" href="?staffPage=@(ViewBag.StaffPage + 1)&customerPage=@ViewBag.CustomerPage">›</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- ================= CUSTOMERS SECTION ================= -->
+        <div class="col-md-4 bg-light border rounded-3 p-3 shadow-sm">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="fw-bold">Customers</h5>
+                <a href="@Url.Action("Create", "Customers")" class="btn btn-success mb-3">
+                    + Create Customer
+                </a>
+
+            </div>
+
+            @if (Model.CustomerList != null && Model.CustomerList.Any())
+            {
+                var c = Model.CustomerList.First();
+                <div class="mb-2">
+                    <label class="fw-semibold">First Name</label>
+                    <input type="text" class="form-control mb-2" value="@c.first_name" readonly />
+                    <label class="fw-semibold">Last Name</label>
+                    <input type="text" class="form-control mb-2" value="@c.last_name" readonly />
+                    <label class="fw-semibold">Customer ID</label>
+                    <input type="text" class="form-control mb-2" value="@c.customer_id" readonly />
+
+                    <div class="border p-2 bg-white rounded mt-2" style="min-height:80px;">
+                        @if (c.orders != null && c.orders.Any())
+                        {
+                            foreach (var order in c.orders)
+                            {
+                                foreach (var item in order.order_items)
+                                {
+                                    <div>• Purchased @item.products.product_name</div>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <span>No purchases</span>
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p>No customers found.</p>
+            }
+
+            <!-- Customer Pagination -->
+            <div class="d-flex justify-content-center mt-3">
+                <nav>
+                    <ul class="pagination pagination-sm mb-0">
+                        <li class="page-item @(ViewBag.CustomerPage <= 1 ? "disabled" : "")">
+                            <a class="page-link" href="?customerPage=@(ViewBag.CustomerPage - 1)&staffPage=@ViewBag.StaffPage">‹</a>
+                        </li>
+                        <li class="page-item"><span class="page-link">@ViewBag.CustomerPage</span></li>
+                        <li class="page-item">
+                            <a class="page-link" href="?customerPage=@(ViewBag.CustomerPage + 1)&staffPage=@ViewBag.StaffPage">›</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- ================= PRODUCTS SECTION ================= -->
+        <div class="col-md-3 bg-light border rounded-3 p-3 shadow-sm">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="fw-bold">Products</h5>
+
+            </div>
+
+            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+            {
+                @Html.DropDownList("brandFilter", (SelectList)ViewBag.BrandFilter, "Brand", new { @class = "form-control mb-2" })
+                @Html.DropDownList("categoryFilter", (SelectList)ViewBag.CategoryFilter, "Category", new { @class = "form-control mb-2" })
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary flex-grow-1">Filter</button>
+            <!-- Clear button resets by submitting without any filter values -->
+            <button type="submit" name="clearFilters" value="true" class="btn btn-outline-secondary flex-grow-1">Clear</button>
+        </div>
+            }
+
+            <div class="border p-3 bg-white rounded" style="min-height:250px;">
+                @if (Model.ProductList != null && Model.ProductList.Any())
+                {
+                    foreach (var p in Model.ProductList)
+                    {
+                        string imageFile = "default_bike.jpeg";
+                        string brand = p.brands.brand_name.ToLower();
+                        string category = p.categories.category_name.ToLower();
+
+                        // Image selection
+                        {
+                            if (category.Contains("cruiser") && (brand.Contains("electra") || brand.Contains("ritchey") || brand.Contains("haro") || brand.Contains("pure")))
+                            {
+                                imageFile = "Electra_cruiser.jpeg";
+                            }
+                            else if (category.Contains("cruiser") && (brand.Contains("strider") || brand.Contains("trek") || brand.Contains("sun") || brand.Contains("surly") || brand.Contains("heller")))
+                            {
+                                imageFile = "Electra_cruiser 1.jpeg";
+                            }
+                            else if (category.Contains("comfort") && (brand.Contains("electra") || brand.Contains("ritchey") || brand.Contains("haro") || brand.Contains("pure")))
+                            {
+                                imageFile = "Sun_Bicycles1.jpeg";
+                            }
+                            else if (category.Contains("comfort") && (brand.Contains("strider") || brand.Contains("trek") || brand.Contains("sun") || brand.Contains("surly") || brand.Contains("heller")))
+                            {
+                                imageFile = "Haro_Bikes1.jpeg";
+                            }
+                            else if (category.Contains("cyclocross") && (brand.Contains("electra") || brand.Contains("ritchey") || brand.Contains("haro") || brand.Contains("pure")))
+                            {
+                                imageFile = "Pure_Cycles1.jpeg";
+                            }
+                            else if (category.Contains("cyclocross") && (brand.Contains("strider") || brand.Contains("trek") || brand.Contains("sun") || brand.Contains("surly") || brand.Contains("heller")))
+                            {
+                                imageFile = "Pure_Cycles2.jpeg";
+                            }
+                            else if (category.Contains("electric") && (brand.Contains("electra") || brand.Contains("ritchey") || brand.Contains("haro") || brand.Contains("pure")))
+                            {
+                                imageFile = "Riychey_bike1.jpeg";
+                            }
+                            else if (category.Contains("electric") && (brand.Contains("strider") || brand.Contains("trek") || brand.Contains("sun") || brand.Contains("surly") || brand.Contains("heller")))
+                            {
+                                imageFile = "Ritchey_bike2.jpeg";
+                            }
+                            else if (category.Contains("mountain") && (brand.Contains("electra") || brand.Contains("ritchey") || brand.Contains("haro") || brand.Contains("pure")))
+                            {
+                                imageFile = "Haro_mountain_bike.jpeg";
+                            }
+                            else if (category.Contains("mountain") && (brand.Contains("strider") || brand.Contains("trek") || brand.Contains("sun") || brand.Contains("surly") || brand.Contains("heller")))
+                            {
+                                imageFile = "Heller_bike1.jpeg";
+                            }
+                            else if (category.Contains("road") && (brand.Contains("electra") || brand.Contains("ritchey") || brand.Contains("haro") || brand.Contains("pure")))
+                            {
+                                imageFile = "Surly_bike.jpeg";
+                            }
+                            else if (category.Contains("road") && (brand.Contains("strider") || brand.Contains("trek") || brand.Contains("sun") || brand.Contains("surly") || brand.Contains("heller")))
+                            {
+                                imageFile = "Surly_preamble_bike.jpeg";
+                            }
+                            else if (category.Contains("child") && (brand.Contains("electra") || brand.Contains("ritchey") || brand.Contains("haro") || brand.Contains("pure")))
+                            {
+                                imageFile = "ChildrensBike1.jpg";
+                            }
+                            else if (category.Contains("child") && brand.Contains("strider"))
+                            {
+                                imageFile = "Strider_balance_bike1.jpeg";
+                            }
+                            else if (category.Contains("child") && (brand.Contains("strider") || brand.Contains("trek") || brand.Contains("sun") || brand.Contains("surly") || brand.Contains("heller")))
+                            {
+                                imageFile = "ChildrensBike2.jpg";
+                            }
+                        }
+
+                        <div class="mb-3">
+                            <strong>@p.product_name</strong><br />
+                            Brand: @p.brands.brand_name <br />
+                            Category: @p.categories.category_name <br />
+                            Model Year: @p.model_year <br />
+                            Price: @String.Format("{0:C}", p.list_price) <br />
+                            <div class="border mt-2 text-center p-2">
+                                <img src="~/content/images/@imageFile" class="img-fluid" alt="@p.product_name" />
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No products found.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

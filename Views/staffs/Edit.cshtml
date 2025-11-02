@@ -1,0 +1,125 @@
+﻿@model HW_03.Models.staffs
+
+@{
+    ViewBag.Title = "Edit Staff";
+}
+
+<link href="~/Content/Theme.css" rel="stylesheet" />
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4 fw-bold text-pink">🛠 Edit Staff</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="card shadow-sm p-4 rounded-3 bg-light">
+            <h4 class="mb-4 text-purple">Staff Details</h4>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger mb-3" })
+            @Html.HiddenFor(model => model.staff_id)
+
+            <div class="row g-3">
+                <!-- First Name -->
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.first_name, htmlAttributes: new { @class = "form-label fw-semibold" })
+                    @Html.EditorFor(model => model.first_name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.first_name, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Last Name -->
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.last_name, htmlAttributes: new { @class = "form-label fw-semibold" })
+                    @Html.EditorFor(model => model.last_name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.last_name, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Email -->
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "form-label fw-semibold" })
+                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Phone -->
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.phone, htmlAttributes: new { @class = "form-label fw-semibold" })
+                    @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Active -->
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.active, htmlAttributes: new { @class = "form-label fw-semibold" })
+                    @Html.EditorFor(model => model.active, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.active, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Store -->
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.store_id, "Store", htmlAttributes: new { @class = "form-label fw-semibold" })
+                    @Html.DropDownList("store_id", null, "Select Store", htmlAttributes: new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.store_id, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Manager -->
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.manager_id, "Manager", htmlAttributes: new { @class = "form-label fw-semibold" })
+                    @Html.DropDownList("manager_id", null, "Select Manager", htmlAttributes: new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.manager_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <!-- Save Button -->
+            <div class="text-center mt-4">
+                <input type="submit" value="💾 Save" class="btn btn-outline-pink btn-lg px-5 fw-bold" />
+            </div>
+
+            <div class="mt-3 text-center">
+                @Html.ActionLink("🔙 Back to List", "About","Home", null, new { @class = "btn btn-outline-pink" })
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    /* Inputs & selects */
+    .form-control, .form-select {
+        border: 1px solid #eecad4;
+        border-radius: 0.75rem;
+        background-color: #fff9fb;
+    }
+
+        .form-control:focus, .form-select:focus {
+            box-shadow: 0 0 0 0.2rem rgba(238, 159, 177, 0.3);
+            border-color: #e695ad;
+        }
+
+    /* Labels */
+    .form-label.fw-semibold {
+        color: #9d6379;
+    }
+
+    /* Buttons */
+    .btn-outline-pink {
+        border: 2px solid #c0678b;
+        color: #c0678b;
+        background-color: transparent;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1.5rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-outline-pink:hover {
+            background-color: #c0678b;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(192, 103, 139, 0.3);
+        }
+</style>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

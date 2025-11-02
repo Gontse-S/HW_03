@@ -1,0 +1,94 @@
+﻿@model HW_03.Models.staffs
+@{ ViewBag.Title = "Details"; }
+<link href="~/Content/Theme.css" rel="stylesheet" />
+<h2>Details</h2>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4 fw-bold text-pink">👤 Staff Details</h2>
+
+    <div class="card shadow-sm rounded-3 p-4 bg-light">
+        <h4 class="mb-3 text-purple">Staff Information</h4>
+        <hr />
+
+        <dl class="row">
+            <dt class="col-sm-3 fw-semibold">First Name</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.first_name)</dd>
+
+            <dt class="col-sm-3 fw-semibold">Last Name</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.last_name)</dd>
+
+            <dt class="col-sm-3 fw-semibold">Email</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.email)</dd>
+
+            <dt class="col-sm-3 fw-semibold">Phone</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.phone)</dd>
+
+            <dt class="col-sm-3 fw-semibold">Active</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.active)</dd>
+
+            <dt class="col-sm-3 fw-semibold">Manager</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.staffs2.first_name)</dd>
+
+            <dt class="col-sm-3 fw-semibold">Store</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.stores.store_name)</dd>
+        </dl>
+
+        <div class="mt-4 d-flex gap-2">
+            @Html.ActionLink("✏️ Edit", "Edit", new { id = Model.staff_id }, new { @class = "btn btn-outline-pink" })
+            @Html.ActionLink("⬅ Back to List", "Index", null, new { @class = "btn btn-outline-purple" })
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Theme styling for Staff Details */
+    .text-pink {
+        color: #c0678b;
+    }
+
+    .text-purple {
+        color: #a24a6a;
+    }
+
+    .card.bg-light {
+        background-color: #fff5f8 !important;
+    }
+
+    dt {
+        color: #9d6379;
+    }
+
+    dd {
+        color: #4b3b47;
+    }
+
+    .btn-outline-pink {
+        border: 2px solid #c0678b;
+        color: #c0678b;
+        background-color: transparent;
+        border-radius: 0.5rem;
+        padding: 0.4rem 1rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-outline-pink:hover {
+            background-color: #c0678b;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(192,103,139,0.3);
+        }
+
+    .btn-outline-purple {
+        border: 2px solid #a24a6a;
+        color: #a24a6a;
+        background-color: transparent;
+        border-radius: 0.5rem;
+        padding: 0.4rem 1rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-outline-purple:hover {
+            background-color: #a24a6a;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(162,74,106,0.3);
+        }
+</style>

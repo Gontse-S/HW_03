@@ -1,0 +1,60 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.custom-navbar {
+    background: linear-gradient(90deg, #fff5f8, #f8f5ff);
+    border-bottom: 2px solid #f5cbd8;
+    padding: 0.8rem 1rem;
+}
+
+.navbar-brand span {
+    color: #a24a6a;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+}
+
+.navbar-brand img {
+    border: 2px solid #f6b6c8;
+    background-color: #fff;
+}
+
+.nav-link {
+    color: #9d6379 !important;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+    .nav-link:hover {
+        color: #c0678b !important;
+        transform: translateY(-2px);
+    }
+
+.navbar-toggler {
+    border-color: #f6b6c8;
+}
+
+.navbar-toggler-icon {
+    filter: hue-rotate(310deg) brightness(0.7);
+}
+
+.shadow-sm {
+    box-shadow: 0 3px 10px rgba(242, 174, 199, 0.2) !important;
+}

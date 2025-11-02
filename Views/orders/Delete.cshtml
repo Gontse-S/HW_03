@@ -1,0 +1,80 @@
+﻿@model HW_03.Models.orders
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>orders</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.order_status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.order_status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.order_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.order_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.required_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.required_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shipped_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shipped_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.customers.first_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customers.first_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.staffs.first_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.staffs.first_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stores.store_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stores.store_name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

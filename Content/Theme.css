@@ -1,0 +1,179 @@
+﻿
+
+
+/* 🌷 General Page Theme */
+body {
+    background: linear-gradient(135deg, #fff5f8, #f8f5ff);
+    font-family: 'Poppins', sans-serif;
+    color: #4b3b47;
+}
+
+.brand-heading {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: baseline; /* align text baseline for perfect H alignment */
+    font-family: 'Pacifico', cursive; /* playful, creative font */
+    justify-content: center;
+}
+
+.cycle-text {
+    color: #cb6ce6;
+    font-size: 3rem;
+    margin: 0;
+}
+
+.haven-text {
+    color: #ff66c4;
+    font-size: 3rem;
+    margin: 0 0 0 -0.6rem; /* move left so H aligns with last letter of Cycle */
+}
+ h5 {
+    color: #a24a6a;
+}
+
+a, .btn {
+    transition: all 0.3s ease;
+}
+
+/* 🌸 Container & Row Adjustments */
+.container-fluid .row {
+    align-items: flex-start !important; /* prevents equal height stretching */
+}
+
+/* 🌼 Section Cards */
+.col-md-4, .col-md-3 {
+    background-color: #ffffffcc;
+    border: 1px solid #f1d7e0;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(242, 174, 199, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block; /* ensures height matches content */
+    height: auto !important; /* stops forced equal heights */
+    min-height: auto !important; /* removes unnecessary minimum height */
+}
+
+    .col-md-4:hover, .col-md-3:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 16px rgba(162, 74, 106, 0.15);
+    }
+
+/* 🌼 Buttons */
+.btn-success {
+    background-color: #f6b6c8;
+    border: none;
+    color: #5a3744;
+    font-weight: 600;
+}
+
+    .btn-success:hover {
+        background-color: #f48ca6;
+        color: #fff;
+    }
+
+.btn-primary {
+    background-color: #c8a2c8;
+    border: none;
+}
+
+    .btn-primary:hover {
+        background-color: #b084b0;
+    }
+
+/* 🌹 Form Inputs */
+.form-control {
+    border: 1px solid #eecad4;
+    border-radius: 0.75rem;
+    background-color: #fff9fb;
+}
+
+    .form-control:focus {
+        box-shadow: 0 0 0 0.2rem rgba(238, 159, 177, 0.3);
+        border-color: #e695ad;
+    }
+
+/* 🌺 Pagination */
+.pagination .page-link {
+    color: #a24a6a;
+    border-radius: 50%;
+    border: none;
+}
+
+    .pagination .page-link:hover {
+        background-color: #f6b6c8;
+        color: white;
+    }
+
+.pagination .page-item.disabled .page-link {
+    color: #d1a6b5;
+    background-color: #fce8ed;
+}
+
+/* 🌸 Section Backgrounds */
+.bg-light {
+    background-color: #fff5f8 !important;
+}
+
+.shadow-sm {
+    box-shadow: 0 2px 6px rgba(162, 74, 106, 0.1) !important;
+}
+
+/* 💐 Inner Content Boxes */
+.border.bg-white.rounded {
+    border: 1px solid #f5cbd8 !important;
+    background-color: #fff9fb !important;
+}
+
+/* 🌼 Labels */
+label {
+    color: #9d6379;
+    font-weight: 600;
+}
+
+/* 🦋 Title Styling */
+.fw-bold.text-center.mb-4 {
+    color: #c0678b;
+    text-shadow: 1px 1px 2px rgba(255, 228, 240, 0.5);
+}
+
+/* Table Styling to match Theme.css */
+.table-hover tbody tr.table-row-hover:hover {
+    background-color: #f6b6c8cc; /* soft hover color from theme */
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+}
+
+.table-purple {
+    background-color: #a24a6a;
+}
+
+    .table-purple th {
+        color: #fff;
+        font-weight: 600;
+    }
+
+.btn-outline-pink {
+    border: 2px solid #c0678b;
+    color: #c0678b;
+    background-color: transparent;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+    .btn-outline-pink:hover {
+        background-color: #c0678b;
+        color: #fff;
+        box-shadow: 0 4px 8px rgba(192, 103, 139, 0.3);
+    }
+
+.table td, .table th {
+    vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+    .col-md-5, .col-md-7 {
+        margin-bottom: 1.5rem;
+    }
+}

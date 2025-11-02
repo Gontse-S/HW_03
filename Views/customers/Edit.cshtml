@@ -1,0 +1,132 @@
+﻿@model HW_03.Models.customers
+
+@{
+    ViewBag.Title = "Edit Customer";
+}
+
+<link href="~/Content/Theme.css" rel="stylesheet" />
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4 fw-bold text-pink">👥 Edit Customer</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="card shadow-sm p-4 rounded-3 bg-light">
+            <h4 class="mb-4 text-purple">Customer Details</h4>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger mb-3" })
+            @Html.HiddenFor(model => model.customer_id)
+
+            <div class="row g-3">
+                <!-- First Name -->
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.first_name, htmlAttributes: new { @class = "form-label fw-semibold" })
+                    @Html.EditorFor(model => model.first_name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.first_name, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Last Name -->
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.last_name, htmlAttributes: new { @class = "form-label fw-semibold" })
+                    @Html.EditorFor(model => model.last_name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.last_name, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Phone -->
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.phone, htmlAttributes: new { @class = "form-label fw-semibold" })
+                    @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Email -->
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "form-label fw-semibold" })
+                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Street -->
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.street, htmlAttributes: new { @class = "form-label fw-semibold" })
+                    @Html.EditorFor(model => model.street, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.street, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- City -->
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.city, htmlAttributes: new { @class = "form-label fw-semibold" })
+                    @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- State -->
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.state, htmlAttributes: new { @class = "form-label fw-semibold" })
+                    @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Zip Code -->
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.zip_code, htmlAttributes: new { @class = "form-label fw-semibold" })
+                    @Html.EditorFor(model => model.zip_code, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.zip_code, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <!-- Save Button -->
+            <div class="text-center mt-4">
+                <input type="submit" value="💾 Save" class="btn btn-outline-pink btn-lg px-5 fw-bold" />
+            </div>
+
+            <div class="mt-3 text-center">
+                @Html.ActionLink("🔙 Back to List", "About", "Home", null, new { @class = "btn btn-outline-pink" })
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    /* Inputs & selects */
+    .form-control, .form-select {
+        border: 1px solid #eecad4;
+        border-radius: 0.75rem;
+        background-color: #fff9fb;
+    }
+
+        .form-control:focus, .form-select:focus {
+            box-shadow: 0 0 0 0.2rem rgba(238, 159, 177, 0.3);
+            border-color: #e695ad;
+        }
+
+    /* Labels */
+    .form-label.fw-semibold {
+        color: #9d6379;
+    }
+
+    /* Buttons */
+    .btn-outline-pink {
+        border: 2px solid #c0678b;
+        color: #c0678b;
+        background-color: transparent;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1.5rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-outline-pink:hover {
+            background-color: #c0678b;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(192, 103, 139, 0.3);
+        }
+</style>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

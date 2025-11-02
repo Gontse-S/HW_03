@@ -1,0 +1,74 @@
+﻿@model HW_03.Models.orders
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>orders</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.order_status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.order_status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.order_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.order_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.required_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.required_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shipped_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shipped_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.customers.first_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customers.first_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.staffs.first_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.staffs.first_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stores.store_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stores.store_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.order_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
